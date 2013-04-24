@@ -7,6 +7,7 @@ import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.util.Timer;
 
+import AIOHerb.util.Condition;
 import AIOHerb.util.Const;
 import AIOHerb.util.Methods;
 import AIOHerb.util.Potion;
@@ -42,7 +43,13 @@ public class MakingPots extends Node {
 	            
 				Widgets.get(548, 34).interact("Make");
 				
-				Methods.dynamicSleep(Inventory.contains(Const.pot.getHerb()),14000);
+				Methods.dynamicSleep(new Condition() {
+					@Override
+					public boolean validate() {
+						return Inventory.contains(Const.pot.getHerb());
+					}
+					}, 2000);
+
 				
 				 Inventory.getItem(Const.pot.getIngre()).getWidgetChild().interact("Use");
 		         Inventory.getItem(Const.pot.getUnf()).getWidgetChild().interact("Use");
@@ -54,7 +61,12 @@ public class MakingPots extends Node {
 		         }
 		            
 		         Widgets.get(548, 34).interact("Make");
-		         Methods.dynamicSleep(Inventory.contains(Const.pot.getIngre()), 14000);
+					Methods.dynamicSleep(new Condition() {
+						@Override
+						public boolean validate() {
+							return Inventory.contains(Const.pot.getIngre());
+						}
+						}, 2000);       
 			}
 			else if(!Inventory.contains(Const.pot.getHerb()) || !Inventory.contains(Const.vialOfWaterID)||
 							!Inventory.contains(Const.pot.getIngre())) {
@@ -78,7 +90,12 @@ public class MakingPots extends Node {
 	            }
 	            
                 Widgets.get(548, 34).interact("Make");
-                Methods.dynamicSleep(!Inventory.contains(Const.vialOfWaterID), 2000);
+				Methods.dynamicSleep(new Condition() {
+					@Override
+					public boolean validate() {
+						return !Inventory.contains(Const.vialOfWaterID);
+					}
+					}, 2000);  
 			}
             else if(!Inventory.contains(Const.unfPot.getHerb()) || !Inventory.contains(Const.vialOfWaterID)) {
             	Const.isBank = true;
