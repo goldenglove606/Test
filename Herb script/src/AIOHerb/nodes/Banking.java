@@ -28,7 +28,7 @@ public class Banking extends Node {
 				public boolean validate() {
 					return Bank.isOpen();
 				}
-				}, 9000);
+				}, 2000);
 		}
 		else if(Const.whatToDo == 1) {
 			Bank.withdraw(Const.pot.getHerb(), 9);
@@ -38,7 +38,7 @@ public class Banking extends Node {
 				public boolean validate() {
 					return Inventory.contains(Const.pot.getHerb());
 				}
-			}, 9000);
+			}, 2000);
 			
 			Bank.withdraw(Const.pot.getIngre(), 9);
 			
@@ -47,7 +47,7 @@ public class Banking extends Node {
 				public boolean validate() {
 					return Inventory.contains(Const.pot.getIngre());
 				}
-			}, 9000);
+			}, 2000);
 				
 			Bank.close();
 			
@@ -56,7 +56,7 @@ public class Banking extends Node {
 				public boolean validate() {
 					return !Bank.isOpen();
 				}
-			}, 9000);
+			}, 2000);
 			
 			Const.isBank = false;
 		}
@@ -67,7 +67,7 @@ public class Banking extends Node {
 				public boolean validate() {
 					return !Inventory.isFull();
 				}
-			}, 9000);
+			}, 2000);
 
 			Bank.withdraw(Const.unfPot.getHerb(), 14);
 			
@@ -76,7 +76,7 @@ public class Banking extends Node {
 				public boolean validate() {
 					return Inventory.contains(Const.unfPot.getHerb());
 				}
-			}, 9000);
+			}, 2000);
 			
 			if(Inventory.contains(Const.unfPot.getHerb())) {
 				Bank.withdraw(Const.vialOfWaterID, 14);
@@ -85,7 +85,7 @@ public class Banking extends Node {
 					public boolean validate() {
 						return Inventory.contains(Const.vialOfWaterID);
 					}
-				}, 9000);
+				}, 2000);
 				
 			}
 			else {
@@ -95,7 +95,7 @@ public class Banking extends Node {
 					public boolean validate() {
 						return Inventory.contains(Const.unfPot.getHerb());
 					}
-				}, 9000);
+				}, 2000);
 			}
 			
 			if(!Inventory.contains(Const.vialOfWaterID)) {
@@ -105,7 +105,7 @@ public class Banking extends Node {
 				public boolean validate() {
 					return Inventory.contains(Const.vialOfWaterID);
 				}
-			}, 9000);
+			}, 2000);
 
 			}
 
@@ -115,7 +115,7 @@ public class Banking extends Node {
 			public boolean validate() {
 				return !Bank.isOpen();
 			}
-		}, 9000);
+		}, 2000);
 			
 			if(Bank.isOpen()) {
 				Bank.close();
@@ -124,7 +124,7 @@ public class Banking extends Node {
 					public boolean validate() {
 						return !Bank.isOpen();
 					}
-				}, 9000);
+				}, 2000);
 
 			}
 			Const.isBank = false;
