@@ -73,7 +73,7 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 
 	   
 	        try {
-	      /*      if (Game.getClientState() != Game.INDEX_MAP_LOADED) {
+	            if (Game.getClientState() != Game.INDEX_MAP_LOADED) {
 	                return 1000;
 	            }
 
@@ -81,11 +81,9 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	                WidgetCache.purge();
 	                Bot.context().getEventManager().addListener(this);
 	                client = Bot.client();
-	                Const.status = "Clien";
-	            } */
+	            } 
 
 	            if (Game.isLoggedIn()) {
-	            	//Const.status  = "Working" ;
 	                for (Node node : jobsCollection) {
 	                    if (node!= null && node.activate()) {
 	                    	Const.status = "Executing";
