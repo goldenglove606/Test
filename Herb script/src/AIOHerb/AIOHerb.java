@@ -33,7 +33,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-@Manifest(authors ={"Goldenglove605"}, name = "GoldenHerb", description = "Makes Potions")
+@Manifest(authors ={"Goldenglove605"}, name = "GoldenHerb2", description = "Makes Potions")
 
 public class AIOHerb extends ActiveScript implements MessageListener, PaintListener {
 	
