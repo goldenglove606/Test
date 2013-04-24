@@ -14,35 +14,39 @@ import AIOHerb.util.UnfPotion;
 
 
 public class MakingPots extends Node {
-	public static Potion pot;
-	public static UnfPotion unfPot;
+	//public static Potion pot;
+	//public static UnfPotion unfPot;
 
 	@Override
 	public boolean activate() {
+
 		return !Const.isBank && !Bank.isOpen();
+
 	}
 
 	@Override
 	public void execute() {
 		Const.status = "Making pots";
 		if(Const.whatToDo == 1) {
-			if(Inventory.contains(pot.getHerb()) && Inventory.contains(Const.vialOfWaterID) &&
-					Inventory.contains(pot.getHerb())){
-				Inventory.getItem(pot.getHerb()).getWidgetChild().interact("Use");
+			Const.status = "Making pots";
+			if(Inventory.contains(Const.pot.getHerb()) && Inventory.contains(Const.vialOfWaterID) &&
+					Inventory.contains(Const.pot.getHerb())){
+
+				Inventory.getItem(Const.pot.getHerb()).getWidgetChild().interact("Use");
 				Inventory.getItem(Const.vialOfWaterID).getWidgetChild().interact("Use");
-				
+
 	            final Timer timer = new Timer(2500);
-	            while (!Widgets.get(548).validate() && timer.isRunning()) {
+	            while (!Widgets.get(548,34).validate() && timer.isRunning()) {
 	                Task.sleep(50);
 	            }
 	            
 				Widgets.get(548, 34).interact("Make");
 				
-				Methods.dynamicSleep(Inventory.contains(pot.getHerb()),14000);
+				Methods.dynamicSleep(Inventory.contains(Const.pot.getHerb()),14000);
 				
-				 Inventory.getItem(pot.getIngre()).getWidgetChild().interact("Use");
-		         Inventory.getItem(pot.getUnf()).getWidgetChild().interact("Use");
-		         Task.sleep(200,300);
+				 Inventory.getItem(Const.pot.getIngre()).getWidgetChild().interact("Use");
+		         Inventory.getItem(Const.pot.getUnf()).getWidgetChild().interact("Use");
+		         sleep(800,1000);
 		         
 		         final Timer timer2 = new Timer(2500);
 		         while (!Widgets.get(548).validate() && timer2.isRunning()) {
@@ -50,10 +54,10 @@ public class MakingPots extends Node {
 		         }
 		            
 		         Widgets.get(548, 34).interact("Make");
-		         Methods.dynamicSleep(Inventory.contains(pot.getIngre()), 14000);
+		         Methods.dynamicSleep(Inventory.contains(Const.pot.getIngre()), 14000);
 			}
-			else if(!Inventory.contains(pot.getHerb()) || !Inventory.contains(Const.vialOfWaterID)||
-							!Inventory.contains(pot.getIngre())) {
+			else if(!Inventory.contains(Const.pot.getHerb()) || !Inventory.contains(Const.vialOfWaterID)||
+							!Inventory.contains(Const.pot.getIngre())) {
 				Const.isBank = true;
 			}
 			else {
@@ -62,19 +66,21 @@ public class MakingPots extends Node {
 			}
 		}
 		else if(Const.whatToDo == 2) {
-			if(Inventory.getCount(unfPot.getHerb()) == 14 && Inventory.getCount(Const.vialOfWaterID) == 14) {
-				Inventory.getItem(unfPot.getHerb()).getWidgetChild().interact("Use");
+			Const.status = "Making unf";
+			if(Inventory.getCount(Const.unfPot.getHerb()) == 14 && Inventory.getCount(Const.vialOfWaterID) == 14) {
+				Inventory.getItem(Const.unfPot.getHerb()).getWidgetChild().interact("Use");
                 Inventory.getItem(Const.vialOfWaterID).getWidgetChild().interact("Use");
-
+                Task.sleep(300,600);
+				
 	            final Timer timer = new Timer(2500);
-	            while (!Widgets.get(548).validate() && timer.isRunning()) {
+	            while (!Widgets.get(548,34).validate() && timer.isRunning()) {
 	                Task.sleep(50);
 	            }
 	            
                 Widgets.get(548, 34).interact("Make");
-                Methods.dynamicSleep(Inventory.contains(Const.vialOfWaterID), 2000);
+                Methods.dynamicSleep(!Inventory.contains(Const.vialOfWaterID), 2000);
 			}
-            else if(!Inventory.contains(unfPot.getHerb()) || !Inventory.contains(Const.vialOfWaterID)) {
+            else if(!Inventory.contains(Const.unfPot.getHerb()) || !Inventory.contains(Const.vialOfWaterID)) {
             	Const.isBank = true;
             }
             else {

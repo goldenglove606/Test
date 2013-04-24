@@ -44,16 +44,16 @@ public class GUI extends JFrame {
 		if(unfRAD.isSelected()) {
 			Const.whatToDo = 2;
 			if(unfBox.getSelectedItem().toString().equals("Ranarr Potion"));
-			AIOHerb.unfPot = UnfPotion.RANARR;
+			Const.unfPot = UnfPotion.RANARR;
 		}
 		else if(potionRAD.isSelected()) {
 			Const.whatToDo = 1;
 			if(comboBox1.getSelectedItem().toString().equals("Guam Potion")) {
-				AIOHerb.pot = Potion.ATTACKPOTION;
+				Const.pot = Potion.ATTACKPOTION;
 			}
 
 		}
-		AIOHerb.guiWait = false;
+		Const.guiWait = false;
 		destroy();
 		
 		

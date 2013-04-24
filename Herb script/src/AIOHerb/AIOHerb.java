@@ -37,16 +37,14 @@ import java.util.List;
 
 public class AIOHerb extends ActiveScript implements MessageListener, PaintListener {
 	
+	// private Tree jobs = null;
+	
 	 private Client client = Bot.client();
 	    private final List<Node> jobsCollection = Collections.synchronizedList(new ArrayList<Node>());
-	    public static boolean guiWait = true;
-	    private Point p;
-	    private boolean hide;
-	    public static Potion pot;
-	    public static UnfPotion unfPot;
 	    
 	    public synchronized final void provide(final Node... jobs) {
 	        for (final Node job : jobs) {
+	        	Const.status = "adding jobs";
 	            if (!jobsCollection.contains(job)) {
 	                jobsCollection.add(job);
 	            }
@@ -60,7 +58,7 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	    	Const.startExp = Skills.getExperience(Skills.HERBLORE);
 	    	
 	    	
-	        Const.status = "Starting";
+	        //Const.status = "Starting";
 	        Camera.setPitch(true);
 	        GUI gui = new GUI();
 	        gui.setVisible(true);
@@ -73,8 +71,9 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	    
 	    public int loop() {
 
+	   
 	        try {
-	            if (Game.getClientState() != Game.INDEX_MAP_LOADED) {
+	      /*      if (Game.getClientState() != Game.INDEX_MAP_LOADED) {
 	                return 1000;
 	            }
 
@@ -82,11 +81,14 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	                WidgetCache.purge();
 	                Bot.context().getEventManager().addListener(this);
 	                client = Bot.client();
-	            }
+	                Const.status = "Clien";
+	            } */
 
 	            if (Game.isLoggedIn()) {
+	            	//Const.status  = "Working" ;
 	                for (Node node : jobsCollection) {
 	                    if (node!= null && node.activate()) {
+	                    	Const.status = "Executing";
 	                        node.execute();
 	                        return Random.nextInt(50, 100);
 	                    }

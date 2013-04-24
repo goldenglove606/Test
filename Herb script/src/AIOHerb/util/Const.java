@@ -6,6 +6,9 @@ import org.powerbot.game.api.util.SkillData;
 import org.powerbot.game.api.util.Timer;
 
 public class Const  {
+	public static Potion pot;
+	public static UnfPotion unfPot;
+	
 	public static int vialOfWaterID = 227; 
 	
 	public static int guamPotionID = 91;
