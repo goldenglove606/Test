@@ -17,7 +17,7 @@ public class Const  {
 	public static boolean isBank = false;
 	
 	public static final Font font1 = new Font("Verdana", 0, 20);
-	public static final String version = "1.5";
+	public static final String version = "1.6";
 	public static String status;
 	public static boolean guiWait = true;
 	public static boolean quit = false;
