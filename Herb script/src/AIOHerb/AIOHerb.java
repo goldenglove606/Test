@@ -131,8 +131,12 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 		}
 
 		@Override
-		public void messageReceived(MessageEvent arg0) {
-			// TODO Auto-generated method stub
+		public void messageReceived(MessageEvent e) {
+			if(Const.whatToDo == 2) {
+				if(e.getMessage().contains("You mix")) {
+					Const.potionsMade ++;
+				}
+			}
 			
 		}
 }

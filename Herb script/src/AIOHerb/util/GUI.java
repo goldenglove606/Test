@@ -43,25 +43,69 @@ public class GUI extends JFrame {
 	private void button1ActionPerformed(ActionEvent e) {
 		if(unfRAD.isSelected()) {
 			Const.whatToDo = 2;
-			
-			if(unfBox.getSelectedItem().toString().equals("Ranarr Unf")) {
+			Const.chosen = unfBox.getSelectedItem().toString();
+			if(Const.chosen.equals("Ranarr Unf")) {
 				Const.unfPot = UnfPotion.RANARR;
 			}
-			else if(unfBox.getSelectedItem().toString().equals("Toadflax Unf")) {
+			else if(Const.chosen.equals("Toadflax Unf")) {
 				Const.unfPot = UnfPotion.TOADFLAX;
 			}
-			else if(unfBox.getSelectedItem().toString().equals("Spiritweed Unf")) {
+			else if(Const.chosen.equals("Spiritweed Unf")) {
 				Const.unfPot = UnfPotion.SPIRITWEED;
 			}
-			else if(unfBox.getSelectedItem().toString().equals("Cadantine Unf")) {
+			else if(Const.chosen.equals("Cadantine Unf")) {
 				Const.unfPot = UnfPotion.CADANTINE;
 			} 
 		}
 		else if(potionRAD.isSelected()) {
 			Const.whatToDo = 1;
-			if(comboBox1.getSelectedItem().toString().equals("Guam Potion")) {
+			Const.chosen = comboBox1.getSelectedItem().toString();
+			if(Const.chosen.equals("Attack Potion")) {
 				Const.pot = Potion.ATTACKPOTION;
 			}
+			else if(Const.chosen.equals("Ranging Potion")) {
+				Const.pot = Potion.RANGINGPOTION;
+			}
+			else if(Const.chosen.equals("Magic Potion")) {
+				Const.pot = Potion.MAGICPOTION;
+			}
+			else if(Const.chosen.equals("Strength Potion")) {
+				Const.pot = Potion.STREGNTHPOTION;
+			}
+			else if(Const.chosen.equals("Defence Potion")) {
+				Const.pot = Potion.DEFENCEPOTION;
+			}
+			else if(Const.chosen.equals("Anti-poison Potion")) {
+				Const.pot = Potion.ANTIPOISONPOTION;
+			}
+			else if(Const.chosen.equals("Prayer Potion")) {
+				Const.pot = Potion.PRAYERPOTION;
+			}
+			else if(Const.chosen.equals("Super Attack Potion")){
+				Const.pot = Potion.SUPERATTACKPOTION;
+			}
+			else if(Const.chosen.equals("Super Strength Potion")) {
+				Const.pot = Potion.SUPERSTRENGTHPOTION;
+			}
+			else if(Const.chosen.equals("Super Restore Potion")) {
+				Const.pot = Potion.SUPERRESTOREPOTION;
+			}
+			else if(Const.chosen.equals("Super Defence Potion")) {
+				Const.pot = Potion.SUPERDEFENCEPOTION;
+			}
+			else if(Const.chosen.equals("Super Ranging Potion")) {
+				Const.pot = Potion.SUPERRANGINGPOTION;
+			}
+			else if(Const.chosen.equals("Super Magic Potion")) {
+				Const.pot = Potion.SUPERMAGICPOTION;
+			}
+			else if(Const.chosen.equals("Zamorak Brew Potion")) {
+				Const.pot = Potion.ZAMORAKBREWPOTION;
+			}
+			else if(Const.chosen.equals("Saradomin Brew Potion")) {
+				Const.pot = Potion.SARADOMINBREWPOTION;
+			}
+			
 
 		}
 		Const.guiWait = false;
