@@ -59,7 +59,7 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	    	
 	    	
 	        //Const.status = "Starting";
-	        Camera.setPitch(true);
+	        Camera.setPitch(true); 
 	        GUI gui = new GUI();
 	        gui.setVisible(true);
 	        while(Const.guiWait){

@@ -10,9 +10,11 @@ public enum UnfPotion {
 	private int herb;
 	private String name;
 	
+	
+	
 	UnfPotion(final int herb, final String name){
 		this.herb = herb;
-		this.name = name;
+		this.name = name;	
 	}
 	
 	public int getHerb() {
@@ -22,4 +24,5 @@ public enum UnfPotion {
 	public String getName() {
 		return name;
 	}
+	
 }

@@ -3,8 +3,10 @@ package AIOHerb.util;
 import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -15,8 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
-
-import AIOHerb.AIOHerb;
 
 public class GUI extends JFrame {
 	 public static void main(String[] args) {
@@ -43,8 +43,19 @@ public class GUI extends JFrame {
 	private void button1ActionPerformed(ActionEvent e) {
 		if(unfRAD.isSelected()) {
 			Const.whatToDo = 2;
-			if(unfBox.getSelectedItem().toString().equals("Ranarr Potion"));
-			Const.unfPot = UnfPotion.RANARR;
+			
+			if(unfBox.getSelectedItem().toString().equals("Ranarr Unf")) {
+				Const.unfPot = UnfPotion.RANARR;
+			}
+			else if(unfBox.getSelectedItem().toString().equals("Toadflax Unf")) {
+				Const.unfPot = UnfPotion.TOADFLAX;
+			}
+			else if(unfBox.getSelectedItem().toString().equals("Spiritweed Unf")) {
+				Const.unfPot = UnfPotion.SPIRITWEED;
+			}
+			else if(unfBox.getSelectedItem().toString().equals("Cadantine Unf")) {
+				Const.unfPot = UnfPotion.CADANTINE;
+			} 
 		}
 		else if(potionRAD.isSelected()) {
 			Const.whatToDo = 1;
