@@ -130,7 +130,7 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	    	g.drawString("Cleaned: " + Const.potionsMade,10,265);
 	    	g.drawString("Clean per hour: " + Const.potionsHour,10,295);
 	    }
-	    else if(Const.whatToDo == 2 || Const.whatToDo == 3) {
+	    else if(Const.whatToDo == 2 || Const.whatToDo == 1) {
 		    g.drawString("Potions made: "+ Const.potionsMade ,10, 265);
 		    g.drawString("Potions per hour: " + Const.potionsHour,10 , 295);
 	    }
@@ -139,7 +139,7 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 
 		@Override
 		public void messageReceived(MessageEvent e) {
-			if(Const.whatToDo == 2 || Const.whatToDo == 1) {
+			if(Const.whatToDo == 2) {
 				if(e.getMessage().contains("You mix")) {
 					Const.potionsMade ++;
 				}
@@ -147,6 +147,11 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 			else if(Const.whatToDo == 3){
 				if(e.getMessage().contains("clean the dirt")){
 					Const.potionsMade ++;
+				}
+			}
+			else {
+				if(e.getMessage().contains("(3)")) {
+					Const.potionsMade++;
 				}
 			}
 			

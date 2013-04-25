@@ -35,8 +35,15 @@ public class Banking extends Node {
 		 */
 		
 		else if(Const.whatToDo == 1) {
-			Bank.withdraw(Const.pot.getHerb(), 9);
+			Bank.depositInventory();
+			Methods.dynamicSleep(new Condition() {
+				@Override
+				public boolean validate() {
+					return !Inventory.isFull();
+				}
+			}, 2000);
 			
+			Bank.withdraw(Const.pot.getHerb(), 9);
 			Methods.dynamicSleep(new Condition() {
 				@Override
 				public boolean validate() {
@@ -52,7 +59,15 @@ public class Banking extends Node {
 					return Inventory.contains(Const.pot.getIngre());
 				}
 			}, 2000);
-				
+			
+			Bank.withdraw(Const.vialOfWaterID, 9);
+			
+			Methods.dynamicSleep(new Condition() {
+			@Override
+			public boolean validate() {
+				return Inventory.contains(Const.vialOfWaterID);
+			}
+		}, 2000);
 			Bank.close();
 			
 			Methods.dynamicSleep(new Condition() {

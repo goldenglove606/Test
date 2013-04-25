@@ -31,28 +31,30 @@ public class MakingPots extends Node {
 			Const.status = "Making pots";
 			if(Inventory.contains(Const.pot.getHerb()) && Inventory.contains(Const.vialOfWaterID) &&
 					Inventory.contains(Const.pot.getHerb())){
-
-				Inventory.getItem(Const.pot.getHerb()).getWidgetChild().interact("Use");
-				Inventory.getItem(Const.vialOfWaterID).getWidgetChild().interact("Use");
-
-	            final Timer timer = new Timer(2500);
-	            while (!Widgets.get(548,34).validate() && timer.isRunning()) {
-	                Task.sleep(50);
-	            }
+					if(Inventory.getCount(Const.vialOfWaterID) == 9){
+				
+						Inventory.getItem(Const.pot.getHerb()).getWidgetChild().interact("Use");
+						Inventory.getItem(Const.vialOfWaterID).getWidgetChild().interact("Use");
+						Task.sleep(500,800);
+						
+						final Timer timer = new Timer(2500);
+						while (!Widgets.get(548,34).validate() && timer.isRunning()) {
+							Task.sleep(50);
+						}
 	            
-				Widgets.get(548, 34).interact("Make");
+						Widgets.get(548, 34).interact("Make");
 				
-				Methods.dynamicSleep(new Condition() {
-					@Override
-					public boolean validate() {
-						return Inventory.contains(Const.pot.getHerb());
+						Methods.dynamicSleep(new Condition() {
+							@Override
+							public boolean validate() {
+								return Inventory.getCount(Const.pot.getHerb()) == 0;
+							}
+						}, 10000);
 					}
-					}, 2000);
 
-				
 				 Inventory.getItem(Const.pot.getIngre()).getWidgetChild().interact("Use");
 		         Inventory.getItem(Const.pot.getUnf()).getWidgetChild().interact("Use");
-		         sleep(800,1000);
+		         Task.sleep(800,1000);
 		         
 		         final Timer timer2 = new Timer(2500);
 		         while (!Widgets.get(548).validate() && timer2.isRunning()) {
@@ -63,9 +65,9 @@ public class MakingPots extends Node {
 					Methods.dynamicSleep(new Condition() {
 						@Override
 						public boolean validate() {
-							return Inventory.contains(Const.pot.getIngre());
+							return Inventory.getCount(Const.pot.getIngre()) == 0;
 						}
-						}, 2000);       
+						}, 10000);       
 			}
 			else if(!Inventory.contains(Const.pot.getHerb()) || !Inventory.contains(Const.vialOfWaterID)||
 							!Inventory.contains(Const.pot.getIngre())) {
