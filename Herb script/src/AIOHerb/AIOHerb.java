@@ -21,6 +21,7 @@ import org.powerbot.game.api.util.Time;
 import org.powerbot.game.client.Client;
 
 import AIOHerb.nodes.Banking;
+import AIOHerb.nodes.CleaningHerbs;
 import AIOHerb.nodes.MakingPots;
 import AIOHerb.util.Const;
 import AIOHerb.util.GUI;
@@ -66,7 +67,7 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	            Task.sleep(100);
 	        }
 	        System.out.println("Done Waiting......");
-	        provide(new Banking(), new MakingPots());
+	        provide(new Banking(), new MakingPots(), new CleaningHerbs());
 	    }
 	    
 	    public int loop() {
@@ -125,15 +126,26 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	    g.drawString("TNL: " + Time.format(Const.sd.timeToLevel(Rate.HOUR, Skills.HERBLORE)), 10, 175);
 	    g.drawString("Status: " + Const.status, 10, 205);
 	    g.drawString("Version: " + Const.version, 10, 235);
-	    g.drawString("Potions made: "+ Const.potionsMade ,10, 265);
-	    g.drawString("Potions per hour: " + Const.potionsHour,10 , 295);
+	    if(Const.whatToDo == 3) {
+	    	g.drawString("Cleaned: " + Const.potionsMade,10,265);
+	    	g.drawString("Clean per hour: " + Const.potionsHour,10,295);
+	    }
+	    else if(Const.whatToDo == 2 || Const.whatToDo == 3) {
+		    g.drawString("Potions made: "+ Const.potionsMade ,10, 265);
+		    g.drawString("Potions per hour: " + Const.potionsHour,10 , 295);
+	    }
 			
 		}
 
 		@Override
 		public void messageReceived(MessageEvent e) {
-			if(Const.whatToDo == 2) {
+			if(Const.whatToDo == 2 || Const.whatToDo == 1) {
 				if(e.getMessage().contains("You mix")) {
+					Const.potionsMade ++;
+				}
+			}
+			else if(Const.whatToDo == 3){
+				if(e.getMessage().contains("clean the dirt")){
 					Const.potionsMade ++;
 				}
 			}

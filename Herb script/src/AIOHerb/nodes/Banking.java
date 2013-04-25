@@ -29,6 +29,11 @@ public class Banking extends Node {
 				}
 				}, 2000);
 		}
+		/*
+		 * Start Bank 1 method
+		 * 
+		 */
+		
 		else if(Const.whatToDo == 1) {
 			Bank.withdraw(Const.pot.getHerb(), 9);
 			
@@ -59,6 +64,12 @@ public class Banking extends Node {
 			
 			Const.isBank = false;
 		}
+		
+		/*
+		 * Start bank 2 method
+		 * 
+		 */
+		
 		else if(Const.whatToDo == 2) {
 			Bank.depositInventory();
 			Methods.dynamicSleep(new Condition() {
@@ -106,6 +117,60 @@ public class Banking extends Node {
 				}
 			}, 2000);
 
+			}
+
+			Bank.close();
+			Methods.dynamicSleep(new Condition() {
+			@Override
+			public boolean validate() {
+				return !Bank.isOpen();
+			}
+		}, 2000);
+			
+			if(Bank.isOpen()) {
+				Bank.close();
+				Methods.dynamicSleep(new Condition() {
+					@Override
+					public boolean validate() {
+						return !Bank.isOpen();
+					}
+				}, 2000);
+
+			}
+			Const.isBank = false;
+		}
+		
+		/*
+		 * Start bank 3 method
+		 * 
+		 */
+		else if(Const.whatToDo == 3) {
+			Bank.depositInventory();
+			Methods.dynamicSleep(new Condition() {
+				@Override
+				public boolean validate() {
+					return !Inventory.isFull();
+				}
+			}, 2000);
+
+			Bank.withdraw(Const.grimy.getGrimyID(), 0);
+			
+			Methods.dynamicSleep(new Condition() {
+				@Override
+				public boolean validate() {
+					return Inventory.contains(Const.grimy.getGrimyID());
+				}
+			}, 2000);
+			
+			if(!Inventory.contains(Const.grimy.getGrimyID())) {
+				Bank.withdraw(Const.grimy.getGrimyID(), 0);
+				Methods.dynamicSleep(new Condition() {
+					@Override
+					public boolean validate() {
+						return Inventory.contains(Const.grimy.getGrimyID());
+					}
+				}, 2000);
+				
 			}
 
 			Bank.close();

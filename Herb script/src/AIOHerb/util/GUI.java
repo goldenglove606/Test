@@ -105,9 +105,65 @@ public class GUI extends JFrame {
 			else if(Const.chosen.equals("Saradomin Brew Potion")) {
 				Const.pot = Potion.SARADOMINBREWPOTION;
 			}
+		}
+		
+		else if(grimyRAD.isSelected()){
+			Const.whatToDo = 3;
+			Const.chosen = comboBox2.getSelectedItem().toString();
+				
+			if(Const.chosen.equals("Guam")) {
+				Const.grimy = Grimy.GUAM;
+			}
+			else if(Const.chosen.equals("Marrentill")) {
+				Const.grimy = Grimy.MARRENTILL;
+			}
+			else if(Const.chosen.equals("Tarromin")) {
+				Const.grimy = Grimy.TARROMIN;
+			}
+			else if(Const.chosen.equals("Harralander")) {
+				Const.grimy = Grimy.HARRALANDER;
+			}
+			else if(Const.chosen.equals("Ranarr")) {
+				Const.grimy = Grimy.RANARR;
+			}
+			else if(Const.chosen.equals("Toadflax")) {
+				Const.grimy = Grimy.TOADFLAX;
+			}
+			else if(Const.chosen.equals("Spiritweed")) {
+				Const.grimy = Grimy.SPIRITWEED;
+			}
+			else if(Const.chosen.equals("Irit")) {
+				Const.grimy = Grimy.IRIT;
+			}
+			else if(Const.chosen.equals("Avantoe")) {
+				Const.grimy = Grimy.AVANTOE;
+			}
+			else if(Const.chosen.equals("Kwuarm")) {
+				Const.grimy = Grimy.KWUARM;
+			}
+			else if(Const.chosen.equals("Snapdragon")) {
+				Const.grimy = Grimy.SNAPDRAGON;
+			}
+			else if(Const.chosen.equals("Cadantine")) {
+				Const.grimy = Grimy.CADANTINE;
+			}
+			else if(Const.chosen.equals("Lantadyme")) {
+				Const.grimy = Grimy.LANTADYME;
+			}
+			else if(Const.chosen.equals("Dwarfweed")) {
+				Const.grimy = Grimy.DWARFWEED;
+			}
+			else if(Const.chosen.equals("Torstol")) {
+				Const.grimy = Grimy.TORSTOL;
+			}
+			else if(Const.chosen.equals("Fellstalk")) {
+				Const.grimy = Grimy.FELLSTALK;
+			}
+				
+		}	
 			
 
-		}
+		
 		Const.guiWait = false;
 		destroy();
 		

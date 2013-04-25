@@ -21,13 +21,12 @@ public class MakingPots extends Node {
 	@Override
 	public boolean activate() {
 
-		return !Const.isBank && !Bank.isOpen();
+		return !Const.isBank && !Bank.isOpen() && (Const.whatToDo == 2 || Const.whatToDo ==1);
 
 	}
 
 	@Override
 	public void execute() {
-		Const.status = "Making pots";
 		if(Const.whatToDo == 1) {
 			Const.status = "Making pots";
 			if(Inventory.contains(Const.pot.getHerb()) && Inventory.contains(Const.vialOfWaterID) &&

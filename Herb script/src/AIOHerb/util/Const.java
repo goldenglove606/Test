@@ -10,6 +10,7 @@ public class Const  {
 
 	public static Potion pot;
 	public static UnfPotion unfPot;
+	public static Grimy grimy;
 	
 	public static final int vialOfWaterID = 227; 
 
