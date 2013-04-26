@@ -34,7 +34,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-@Manifest(authors ={"Goldenglove605"}, name = "GoldenHerb2", description = "Makes Potions")
+@Manifest(authors ={"Goldenglove605"}, name = "AIO Herb", description = "Makes Potions")
 
 public class AIOHerb extends ActiveScript implements MessageListener, PaintListener {
 	
@@ -55,9 +55,11 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	    public void onStart() {
 	    	
 	    	Mouse.setSpeed(Speed.FAST);
+	    	if(Game.isLoggedIn()) {
 	    	Const.startTime = System.currentTimeMillis();
 	    	Const.startExp = Skills.getExperience(Skills.HERBLORE);
-	    	
+	    	Const.gotExp = true;
+	    	}
 	    	
 	        //Const.status = "Starting";
 	        Camera.setPitch(true); 

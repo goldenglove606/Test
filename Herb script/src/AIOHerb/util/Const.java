@@ -1,8 +1,5 @@
 package AIOHerb.util;
 
-import java.awt.Font;
-import java.util.ArrayList;
-
 import org.powerbot.game.api.util.SkillData;
 import org.powerbot.game.api.util.Timer;
 
@@ -16,12 +13,12 @@ public class Const  {
 
 	public static boolean isBank = false;
 	
-	public static final Font font1 = new Font("Verdana", 0, 20);
 	public static final String version = "1.6";
 	public static String status;
 	public static boolean guiWait = true;
 	public static boolean quit = false;
 	public static String chosen;
+	public static boolean gotExp = false;
 
 	
 	public static final Timer runTime = new Timer(0);
