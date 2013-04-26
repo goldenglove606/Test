@@ -117,23 +117,24 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	        g.drawLine(Mouse.getX() - 5, Mouse.getY() - 5, Mouse.getX() + 5, Mouse.getY() + 5);
 	        g.drawLine(Mouse.getX() - 5, Mouse.getY() + 5, Mouse.getX() + 5, Mouse.getY() - 5);
 	        g.setBackground(Color.GREEN);
-	    g.setColor(Color.WHITE);
-	    g.setFont(Const.font1);
-	    g.drawString(Const.runTime.toElapsedString(), 10, 55);
-	    g.drawString("Exp Gained: " + Const.expGained, 10, 85);
-	    g.drawString("Current Level:" + Const.currentLevel, 10, 115);
-	    g.drawString("Exp per hour: " +  Const.experienceHour, 10, 145);
-	    g.drawString("TNL: " + Time.format(Const.sd.timeToLevel(Rate.HOUR, Skills.HERBLORE)), 10, 175);
-	    g.drawString("Status: " + Const.status, 10, 205);
-	    g.drawString("Version: " + Const.version, 10, 235);
-	    if(Const.whatToDo == 3) {
-	    	g.drawString("Cleaned: " + Const.potionsMade,10,265);
-	    	g.drawString("Clean per hour: " + Const.potionsHour,10,295);
-	    }
-	    else if(Const.whatToDo == 2 || Const.whatToDo == 1) {
-		    g.drawString("Potions made: "+ Const.potionsMade ,10, 265);
-		    g.drawString("Potions per hour: " + Const.potionsHour,10 , 295);
-	    }
+	        g.setColor(new Color(0, 0, 0, 85));
+            g.fillRoundRect(5, 20, 150, 144, 15, 25);
+            g.setColor(Color.WHITE);
+            g.drawString(Const.runTime.toElapsedString(), 15, 35);
+            g.drawString("Exp Gained: " + Const.expGained, 15, 50);
+    	    g.drawString("Current Level:" + Const.currentLevel, 15, 65);
+    	    g.drawString("Exp per hour: " +  Const.experienceHour, 15, 80);
+    	    g.drawString("TNL: " + Time.format(Const.sd.timeToLevel(Rate.HOUR, Skills.HERBLORE)), 15, 95);
+    	    g.drawString("Status: " + Const.status, 15, 110);
+    	    g.drawString("Version: " + Const.version, 15, 125);
+    	    if(Const.whatToDo == 3) {
+    	    	g.drawString("Cleaned: " + Const.potionsMade,15,140);
+    	    	g.drawString("Clean per hour: " + Const.potionsHour,15,155);
+    	    }
+    	    else if(Const.whatToDo == 2 || Const.whatToDo == 1) {
+    		    g.drawString("Potions made: "+ Const.potionsMade ,15, 140);
+    		    g.drawString("Potions per hour: " + Const.potionsHour,15 , 155);
+    	    }
 			
 		}
 
