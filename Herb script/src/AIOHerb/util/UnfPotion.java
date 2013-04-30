@@ -7,8 +7,8 @@ public enum UnfPotion {
 	SPIRITWEED(12172,"Spiritweed Unf"),
 	CADANTINE(265,"Cadantine Unf");
 
-	private int herb;
-	private String name;
+	private final int herb;
+	private final String name;
 	
 	
 	

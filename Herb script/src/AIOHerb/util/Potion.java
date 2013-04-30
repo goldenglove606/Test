@@ -18,10 +18,10 @@ public enum Potion {
 	ZAMORAKBREWPOTION(269,247,111,"Zamorak Brew Potion"),
 	SARADOMINBREWPOTION(2998,6693,3002,"Saradomin Brew Potion");
 	
-	private int herb; //herb id
-	private int ingre; //ingredient to use
-	private int unf; //unf to use
-	private String name; //potion name
+	private final int herb; //herb id
+	private final int ingre; //ingredient to use
+	private final int unf; //unf to use
+	private final String name; //potion name
 	
 	 Potion(final int herb, final int ingre, final int unf, final String name) {
 		this.herb = herb;

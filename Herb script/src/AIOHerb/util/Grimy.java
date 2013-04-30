@@ -19,8 +19,8 @@ public enum Grimy {
 	TORSTOL(219,"Torstol"),
 	FELLSTALK(21626,"Fellstalk");
 	
-	private int grimyID; //grimy herb id
-	private String name;
+	private final int grimyID; //grimy herb id
+	private final String name;
 	
 	Grimy(final int grimyID, final String name) {
 		this.grimyID = grimyID;
