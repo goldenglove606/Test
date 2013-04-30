@@ -8,10 +8,8 @@ import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.util.Timer;
 
 import AIOHerb.util.Condition;
-import AIOHerb.util.Const;
+import AIOHerb.util.Variables;
 import AIOHerb.util.Methods;
-import AIOHerb.util.Potion;
-import AIOHerb.util.UnfPotion;
 
 
 public class MakingPots extends Node {
@@ -21,89 +19,168 @@ public class MakingPots extends Node {
 	@Override
 	public boolean activate() {
 
-		return !Const.isBank && !Bank.isOpen() && (Const.whatToDo == 2 || Const.whatToDo ==1);
+		return !Variables.isBank && !Bank.isOpen() && (Variables.whatToDo == 2 || Variables.whatToDo ==1);
 
 	}
 
 	@Override
 	public void execute() {
-		if(Const.whatToDo == 1) {
-			Const.status = "Making pots";
-			if(Inventory.contains(Const.pot.getHerb()) && Inventory.contains(Const.vialOfWaterID) &&
-					Inventory.contains(Const.pot.getHerb())){
-					if(Inventory.getCount(Const.vialOfWaterID) == 9){
+		if(Variables.whatToDo == 1) {
+			boolean isHerbInInv = Inventory.getCount(Variables.pot.getHerb()) == 9;
+			boolean isVialInInv = Inventory.getCount(Variables.VIAL_OF_WATER) == 9;
+			boolean isIngreInInv = Inventory.getCount(Variables.pot.getIngre()) == 9;
+			boolean validated = false;
+			
+			
+			Variables.status = "Making pots";
+			if(isHerbInInv && isVialInInv && isIngreInInv) {
 				
-						Inventory.getItem(Const.pot.getHerb()).getWidgetChild().interact("Use");
-						Inventory.getItem(Const.vialOfWaterID).getWidgetChild().interact("Use");
+						Inventory.getItem(Variables.pot.getHerb()).getWidgetChild().interact("Use");
+						Inventory.getItem(Variables.VIAL_OF_WATER).getWidgetChild().interact("Use");
 						Task.sleep(500,800);
 						
-						final Timer timer = new Timer(2500);
-						while (!Widgets.get(548,34).validate() && timer.isRunning()) {
-							Task.sleep(50);
+						validated = Methods.dynamicSleep(new Condition() {
+							@Override
+							public boolean validate() {
+							
+								return Widgets.get(548,34).validate();
+							}
+							}, 2000);
+						
+						if(!validated) {
+			            	Inventory.getItem(Variables.pot.getHerb()).getWidgetChild().interact("Use");
+			                Inventory.getItem(Variables.VIAL_OF_WATER).getWidgetChild().interact("Use");
+			                Task.sleep(300,600);
+			                
+				            final Timer timer = new Timer(2500);
+				            while (!Widgets.get(548,34).validate() && timer.isRunning()) {
+				                Task.sleep(25);
+				            }
 						}
 	            
-						Widgets.get(548, 34).interact("Make");
+						validated = Widgets.get(548, 34).interact("Make");
 				
 						Methods.dynamicSleep(new Condition() {
 							@Override
 							public boolean validate() {
-								return Inventory.getCount(Const.pot.getHerb()) == 0;
+								return Inventory.getCount(Variables.pot.getHerb()) == 0;
 							}
 						}, 10000);
-					}
-
-				 Inventory.getItem(Const.pot.getIngre()).getWidgetChild().interact("Use");
-		         Inventory.getItem(Const.pot.getUnf()).getWidgetChild().interact("Use");
+						
+						if(!validated) {
+							Widgets.get(548, 34).interact("Make");
+							Methods.dynamicSleep(new Condition() {
+								@Override
+								public boolean validate() {
+									return !Inventory.contains(Variables.VIAL_OF_WATER);
+								}
+								}, 10000); 
+						}
+						
+	
+				 Inventory.getItem(Variables.pot.getIngre()).getWidgetChild().interact("Use");
+		         Inventory.getItem(Variables.pot.getUnf()).getWidgetChild().interact("Use");
 		         Task.sleep(800,1000);
 		         
-		         final Timer timer2 = new Timer(2500);
-		         while (!Widgets.get(548).validate() && timer2.isRunning()) {
-		                Task.sleep(50);
-		         }
+		         validated = Methods.dynamicSleep(new Condition() {
+						@Override
+						public boolean validate() {
+						
+							return Widgets.get(548,34).validate();
+						}
+						}, 2000);
+		         
+		         if(!validated) {
+		            	Inventory.getItem(Variables.pot.getIngre()).getWidgetChild().interact("Use");
+		                Inventory.getItem(Variables.pot.getUnf()).getWidgetChild().interact("Use");
+		                Task.sleep(300,600);
+		                
+			            final Timer timer = new Timer(2500);
+			            while (!Widgets.get(548,34).validate() && timer.isRunning()) {
+			                Task.sleep(25);
+			            }
+					}
 		            
-		         Widgets.get(548, 34).interact("Make");
+		        validated = Widgets.get(548, 34).interact("Make");
 					Methods.dynamicSleep(new Condition() {
 						@Override
 						public boolean validate() {
-							return Inventory.getCount(Const.pot.getIngre()) == 0;
+							return Inventory.getCount(Variables.pot.getIngre()) == 0;
 						}
-						}, 10000);       
+						}, 10000);   
+					if(!validated) {
+						Widgets.get(548, 34).interact("Make");
+						Methods.dynamicSleep(new Condition() {
+							@Override
+							public boolean validate() {
+								return Inventory.getCount(Variables.pot.getIngre()) == 0;
+							}
+							}, 10000); 
+					}
 			}
-			else if(!Inventory.contains(Const.pot.getHerb()) || !Inventory.contains(Const.vialOfWaterID)||
-							!Inventory.contains(Const.pot.getIngre())) {
-				Const.isBank = true;
+			else if(!Inventory.contains(Variables.pot.getHerb()) || !Inventory.contains(Variables.VIAL_OF_WATER)||
+							!Inventory.contains(Variables.pot.getIngre())) {
+				Variables.isBank = true;
 			}
 			else {
 				//Shouldnt get this far but it might
 				Task.sleep(200,300);
 			}
 		}
-		else if(Const.whatToDo == 2) {
-			Const.status = "Making unf";
-			if(Inventory.getCount(Const.unfPot.getHerb()) == 14 && Inventory.getCount(Const.vialOfWaterID) == 14) {
-				Inventory.getItem(Const.unfPot.getHerb()).getWidgetChild().interact("Use");
-                Inventory.getItem(Const.vialOfWaterID).getWidgetChild().interact("Use");
+		
+		else if(Variables.whatToDo == 2) {
+			Variables.status = "Making unf";
+			boolean isHerbInInv = Inventory.getCount(Variables.unfPot.getHerb()) == 14;
+			boolean isVialInInv = Inventory.getCount(Variables.VIAL_OF_WATER) == 14;
+            boolean validated = false;
+			
+			if(isHerbInInv && isVialInInv) {
+				Inventory.getItem(Variables.unfPot.getHerb()).getWidgetChild().interact("Use");
+                Inventory.getItem(Variables.VIAL_OF_WATER).getWidgetChild().interact("Use");
                 Task.sleep(300,600);
-				
-	            final Timer timer = new Timer(2500);
-	            while (!Widgets.get(548,34).validate() && timer.isRunning()) {
-	                Task.sleep(50);
+                
+				validated = Methods.dynamicSleep(new Condition() {
+					@Override
+					public boolean validate() {
+					
+						return Widgets.get(548,34).validate();
+					}
+					}, 2000);
+                
+	            if(!validated) {
+	            	Inventory.getItem(Variables.unfPot.getHerb()).getWidgetChild().interact("Use");
+	                Inventory.getItem(Variables.VIAL_OF_WATER).getWidgetChild().interact("Use");
+	                Task.sleep(300,600);
+	                
+		            final Timer timer = new Timer(2500);
+		            while (!Widgets.get(548,34).validate() && timer.isRunning()) {
+		                Task.sleep(25);
+		            }
 	            }
 	            
-                Widgets.get(548, 34).interact("Make");
+               validated = Widgets.get(548, 34).interact("Make");
 				Methods.dynamicSleep(new Condition() {
 					@Override
 					public boolean validate() {
-						return !Inventory.contains(Const.vialOfWaterID);
+						return !Inventory.contains(Variables.VIAL_OF_WATER);
 					}
-					}, 2000);  
+					}, 2000); 
+				if(!validated) {
+					Widgets.get(548, 34).interact("Make");
+					Methods.dynamicSleep(new Condition() {
+						@Override
+						public boolean validate() {
+							return !Inventory.contains(Variables.VIAL_OF_WATER);
+						}
+						}, 2000); 
+				}
 			}
-            else if(!Inventory.contains(Const.unfPot.getHerb()) || !Inventory.contains(Const.vialOfWaterID)) {
-            	Const.isBank = true;
+            else if(!Inventory.contains(Variables.unfPot.getHerb()) || !Inventory.contains(Variables.VIAL_OF_WATER)) {
+            	Variables.isBank = true;
             }
             else {
                 Task.sleep(100,200);
-        }
+            }
 		}
 		
 	}

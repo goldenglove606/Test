@@ -8,7 +8,7 @@ import org.powerbot.game.api.methods.widget.Bank;
 import org.powerbot.game.api.util.Timer;
 
 import AIOHerb.util.Condition;
-import AIOHerb.util.Const;
+import AIOHerb.util.Variables;
 import AIOHerb.util.Methods;
 
 public class CleaningHerbs extends Node {
@@ -16,32 +16,60 @@ public class CleaningHerbs extends Node {
 	@Override
 	public boolean activate() {
 		
-		return Const.whatToDo == 3 && !Const.isBank && !Bank.isOpen();
+		return Variables.whatToDo == 3 && !Variables.isBank && !Bank.isOpen();
 	}
 
 	@Override
 	public void execute() {
-		Const.status = "Cleaning Herbs";
-		if(Const.whatToDo == 3) {
-			if(Inventory.getCount(Const.grimy.getGrimyID()) == 28) {
-				Inventory.getItem(Const.grimy.getGrimyID()).getWidgetChild().interact("Clean");
+		Variables.status = "Cleaning Herbs";
+		if(Variables.whatToDo == 3) {
+			boolean isGrimyInInv = Inventory.getCount(Variables.grimy.getGrimyID()) == 28;
+			boolean validated = false;
+			
+			if(isGrimyInInv) {
+				Inventory.getItem(Variables.grimy.getGrimyID()).getWidgetChild().interact("Clean");
 				Task.sleep(300,600);
 				
-				 final Timer timer = new Timer(2500);
-		            while (!Widgets.get(548,34).validate() && timer.isRunning()) {
-		                Task.sleep(50);
-		            }
-		            Widgets.get(548, 34).interact("Make");
+				validated = Methods.dynamicSleep(new Condition() {
+					@Override
+					public boolean validate() {
 					
+						return Widgets.get(548,34).validate();
+					}
+					}, 2000);
+				
+				 if(!validated) {
+					 Inventory.getItem(Variables.grimy.getGrimyID()).getWidgetChild().interact("Clean");
+		             Task.sleep(300,600);
+		                
+			            final Timer timer = new Timer(2500);
+			            while (!Widgets.get(548,34).validate() && timer.isRunning()) {
+			                Task.sleep(25);
+			            }
+		            }
+				 
+	               validated = Widgets.get(548, 34).interact("Make");
 					Methods.dynamicSleep(new Condition() {
 						@Override
 						public boolean validate() {
-							return Inventory.getCount(Const.grimy.getGrimyID()) != 28;
+							return !Inventory.contains(Variables.grimy.getGrimyID());
 						}
 						}, 2000);
+					
+					if(!validated) {
+						Widgets.get(548, 34).interact("Make");
+						Methods.dynamicSleep(new Condition() {
+							@Override
+							public boolean validate() {
+								return !Inventory.contains(Variables.grimy.getGrimyID());
+							}
+							}, 2000); 
+					}
+				
+				
 			}
-			else if(!Inventory.contains(Const.grimy.getGrimyID())) {
-	            	Const.isBank = true;
+			else if(!Inventory.contains(Variables.grimy.getGrimyID())) {
+	            	Variables.isBank = true;
 	        }
 	        else {
 	                Task.sleep(100,200);

@@ -5,20 +5,20 @@ import org.powerbot.game.api.methods.tab.Inventory;
 import org.powerbot.game.api.methods.widget.Bank;
 
 import AIOHerb.util.Condition;
-import AIOHerb.util.Const;
 import AIOHerb.util.Methods;
+import AIOHerb.util.Variables;
 
 public class Banking extends Node {
 	
 
 	@Override
 	public boolean activate() {
-		return Const.isBank || Bank.isOpen();
+		return Variables.isBank || Bank.isOpen();
 	}
 
 	@Override
 	public void execute() {
-		Const.status = "Banking";
+		Variables.status = "Banking";
 		if(!Bank.isOpen() && Bank.getNearest() != null) {
 			Bank.open();
 			Methods.dynamicSleep(new Condition() {
@@ -34,50 +34,57 @@ public class Banking extends Node {
 		 * 
 		 */
 		
-		else if(Const.whatToDo == 1) {
+		else if(Variables.whatToDo == 1) {
 			Bank.depositInventory();
-			Methods.dynamicSleep(new Condition() {
+			if(!Methods.dynamicSleep(new Condition() {
 				@Override
 				public boolean validate() {
 					return !Inventory.isFull();
 				}
-			}, 2000);
-			
-			Bank.withdraw(Const.pot.getHerb(), 9);
-			Methods.dynamicSleep(new Condition() {
-				@Override
-				public boolean validate() {
-					return Inventory.contains(Const.pot.getHerb());
-				}
-			}, 2000);
-			
-			Bank.withdraw(Const.pot.getIngre(), 9);
-			
-			Methods.dynamicSleep(new Condition() {
-				@Override
-				public boolean validate() {
-					return Inventory.contains(Const.pot.getIngre());
-				}
-			}, 2000);
-			
-			Bank.withdraw(Const.vialOfWaterID, 9);
-			
-			Methods.dynamicSleep(new Condition() {
-			@Override
-			public boolean validate() {
-				return Inventory.contains(Const.vialOfWaterID);
+			}, 2000)) {
+				Bank.depositInventory();
 			}
-		}, 2000);
-			Bank.close();
 			
-			Methods.dynamicSleep(new Condition() {
+			Bank.withdraw(Variables.pot.getHerb(), 9);
+			if(!Methods.dynamicSleep(new Condition() {
+				@Override
+				public boolean validate() {
+					return Inventory.contains(Variables.pot.getHerb());
+				}
+			}, 2000) ) {
+				Bank.withdraw(Variables.pot.getHerb(), 9);
+			}
+			
+			Bank.withdraw(Variables.pot.getIngre(), 9);
+			if(!Methods.dynamicSleep(new Condition() {
+				@Override
+				public boolean validate() {
+					return Inventory.contains(Variables.pot.getIngre());
+				}
+			}, 2000)) {
+				Bank.withdraw(Variables.pot.getIngre(), 9);
+			}
+			
+			Bank.withdraw(Variables.VIAL_OF_WATER, 9);
+			if(!Methods.dynamicSleep(new Condition() {
+				@Override
+				public boolean validate() {
+					return Inventory.contains(Variables.VIAL_OF_WATER);
+				}
+			}, 2000)) {
+				Bank.withdraw(Variables.VIAL_OF_WATER, 9);
+			}
+			Bank.close();
+			if(!Methods.dynamicSleep(new Condition() {
 				@Override
 				public boolean validate() {
 					return !Bank.isOpen();
 				}
-			}, 2000);
-			
-			Const.isBank = false;
+				}, 2000)) {
+				Bank.close();
+			}
+					
+			Variables.isBank = false;
 		}
 		
 		/*
@@ -85,128 +92,87 @@ public class Banking extends Node {
 		 * 
 		 */
 		
-		else if(Const.whatToDo == 2) {
+		else if(Variables.whatToDo == 2) {
 			Bank.depositInventory();
-			Methods.dynamicSleep(new Condition() {
+			if(!Methods.dynamicSleep(new Condition() {
 				@Override
 				public boolean validate() {
 					return !Inventory.isFull();
 				}
-			}, 2000);
-
-			Bank.withdraw(Const.unfPot.getHerb(), 14);
+			}, 2000)) {
+				Bank.depositInventory();
+			}
 			
-			Methods.dynamicSleep(new Condition() {
+			Bank.withdraw(Variables.unfPot.getHerb(), 14);			
+			if(!Methods.dynamicSleep(new Condition() {
 				@Override
 				public boolean validate() {
-					return Inventory.contains(Const.unfPot.getHerb());
+					return Inventory.contains(Variables.unfPot.getHerb());
 				}
-			}, 2000);
-			
-			if(Inventory.contains(Const.unfPot.getHerb())) {
-				Bank.withdraw(Const.vialOfWaterID, 14);
-				Methods.dynamicSleep(new Condition() {
+			}, 2000)) {
+				Bank.withdraw(Variables.unfPot.getHerb(), 14);
+			}
+					
+			Bank.withdraw(Variables.VIAL_OF_WATER, 14);
+			if(!Methods.dynamicSleep(new Condition() {
 					@Override
 					public boolean validate() {
-						return Inventory.contains(Const.vialOfWaterID);
+						return Inventory.contains(Variables.VIAL_OF_WATER);
 					}
-				}, 2000);
+				}, 2000)) {
+				Bank.withdraw(Variables.VIAL_OF_WATER, 14);
+			}
 				
-			}
-			else {
-				Bank.withdraw(Const.unfPot.getHerb(), 14);
-				Methods.dynamicSleep(new Condition() {
-					@Override
-					public boolean validate() {
-						return Inventory.contains(Const.unfPot.getHerb());
-					}
-				}, 2000);
-			}
-			
-			if(!Inventory.contains(Const.vialOfWaterID)) {
-				Bank.withdraw(Const.vialOfWaterID, 14);
-				Methods.dynamicSleep(new Condition() {
-				@Override
-				public boolean validate() {
-					return Inventory.contains(Const.vialOfWaterID);
-				}
-			}, 2000);
-
-			}
-
 			Bank.close();
-			Methods.dynamicSleep(new Condition() {
+			if(!Methods.dynamicSleep(new Condition() {
 			@Override
 			public boolean validate() {
 				return !Bank.isOpen();
 			}
-		}, 2000);
-			
-			if(Bank.isOpen()) {
+		}, 2000)) {
 				Bank.close();
-				Methods.dynamicSleep(new Condition() {
-					@Override
-					public boolean validate() {
-						return !Bank.isOpen();
-					}
-				}, 2000);
-
 			}
-			Const.isBank = false;
+
+			Variables.isBank = false;
 		}
 		
 		/*
 		 * Start bank 3 method
 		 * 
 		 */
-		else if(Const.whatToDo == 3) {
+		else if(Variables.whatToDo == 3) {
 			Bank.depositInventory();
-			Methods.dynamicSleep(new Condition() {
+			if(!Methods.dynamicSleep(new Condition() {
 				@Override
 				public boolean validate() {
 					return !Inventory.isFull();
 				}
-			}, 2000);
+			}, 2000)) {
+				Bank.depositInventory();
+			}
 
-			Bank.withdraw(Const.grimy.getGrimyID(), 0);
-			
-			Methods.dynamicSleep(new Condition() {
+			Bank.withdraw(Variables.grimy.getGrimyID(), 0);
+			if(!Methods.dynamicSleep(new Condition() {
 				@Override
 				public boolean validate() {
-					return Inventory.contains(Const.grimy.getGrimyID());
+					return Inventory.contains(Variables.grimy.getGrimyID());
 				}
-			}, 2000);
-			
-			if(!Inventory.contains(Const.grimy.getGrimyID())) {
-				Bank.withdraw(Const.grimy.getGrimyID(), 0);
-				Methods.dynamicSleep(new Condition() {
-					@Override
-					public boolean validate() {
-						return Inventory.contains(Const.grimy.getGrimyID());
-					}
-				}, 2000);
-				
+			}, 2000)) {
+				Bank.withdraw(Variables.grimy.getGrimyID(), 0);
 			}
 
 			Bank.close();
-			Methods.dynamicSleep(new Condition() {
-			@Override
-			public boolean validate() {
-				return !Bank.isOpen();
-			}
-		}, 2000);
 			
-			if(Bank.isOpen()) {
-				Bank.close();
-				Methods.dynamicSleep(new Condition() {
-					@Override
-					public boolean validate() {
-						return !Bank.isOpen();
-					}
-				}, 2000);
-
+			if(!Methods.dynamicSleep(new Condition() {
+				@Override
+				public boolean validate() {
+					return !Bank.isOpen();
+				}
+				}, 2000)) {
+					Bank.close();
 			}
-			Const.isBank = false;
+
+			Variables.isBank = false;
 		}
 	}
 }

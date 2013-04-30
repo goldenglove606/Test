@@ -1,12 +1,9 @@
 package AIOHerb.util;
 
 import java.awt.Container;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -19,7 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 
 public class GUI extends JFrame {
-	 public static void main(String[] args) {
+	
+	/*public static void main(String[] args) {
 	        EventQueue.invokeLater(new Runnable() {
 	            public void run() {
 	                try {
@@ -30,300 +28,149 @@ public class GUI extends JFrame {
 	                }
 	            }
 	        });
-	    }
+	    } */
 	
 	public GUI() {
 		initComponents();
 	}
-
-	public void destroy() {
-		this.dispose();
-	}
 	
 	private void button1ActionPerformed(ActionEvent e) {
 		if(unfRAD.isSelected()) {
-			Const.whatToDo = 2;
-			Const.chosen = unfBox.getSelectedItem().toString();
-			if(Const.chosen.equals("Ranarr Unf")) {
-				Const.unfPot = UnfPotion.RANARR;
+			Variables.whatToDo = 2;
+			Variables.chosen = unfBox.getSelectedItem().toString();
+			
+			switch(Variables.chosen) {
+			case "Ranarr Unf":
+				Variables.unfPot = UnfPotion.RANARR;
+				break;
+			case "Toadflax Unf":
+				Variables.unfPot = UnfPotion.TOADFLAX;
+				break;
+			case "Spiritweed Unf":
+				Variables.unfPot = UnfPotion.SPIRITWEED;
+				break;
+			case "Cadantine Unf":
+				Variables.unfPot = UnfPotion.CADANTINE;
+				break;
+			default: //default is ranarr
+				Variables.unfPot = UnfPotion.RANARR;
 			}
-			else if(Const.chosen.equals("Toadflax Unf")) {
-				Const.unfPot = UnfPotion.TOADFLAX;
-			}
-			else if(Const.chosen.equals("Spiritweed Unf")) {
-				Const.unfPot = UnfPotion.SPIRITWEED;
-			}
-			else if(Const.chosen.equals("Cadantine Unf")) {
-				Const.unfPot = UnfPotion.CADANTINE;
-			} 
 		}
 		else if(potionRAD.isSelected()) {
-			Const.whatToDo = 1;
-			Const.chosen = comboBox1.getSelectedItem().toString();
-			if(Const.chosen.equals("Attack Potion")) {
-				Const.pot = Potion.ATTACKPOTION;
-			}
-			else if(Const.chosen.equals("Ranging Potion")) {
-				Const.pot = Potion.RANGINGPOTION;
-			}
-			else if(Const.chosen.equals("Magic Potion")) {
-				Const.pot = Potion.MAGICPOTION;
-			}
-			else if(Const.chosen.equals("Strength Potion")) {
-				Const.pot = Potion.STREGNTHPOTION;
-			}
-			else if(Const.chosen.equals("Defence Potion")) {
-				Const.pot = Potion.DEFENCEPOTION;
-			}
-			else if(Const.chosen.equals("Anti-poison Potion")) {
-				Const.pot = Potion.ANTIPOISONPOTION;
-			}
-			else if(Const.chosen.equals("Prayer Potion")) {
-				Const.pot = Potion.PRAYERPOTION;
-			}
-			else if(Const.chosen.equals("Super Attack Potion")){
-				Const.pot = Potion.SUPERATTACKPOTION;
-			}
-			else if(Const.chosen.equals("Super Strength Potion")) {
-				Const.pot = Potion.SUPERSTRENGTHPOTION;
-			}
-			else if(Const.chosen.equals("Super Restore Potion")) {
-				Const.pot = Potion.SUPERRESTOREPOTION;
-			}
-			else if(Const.chosen.equals("Super Defence Potion")) {
-				Const.pot = Potion.SUPERDEFENCEPOTION;
-			}
-			else if(Const.chosen.equals("Super Ranging Potion")) {
-				Const.pot = Potion.SUPERRANGINGPOTION;
-			}
-			else if(Const.chosen.equals("Super Magic Potion")) {
-				Const.pot = Potion.SUPERMAGICPOTION;
-			}
-			else if(Const.chosen.equals("Zamorak Brew Potion")) {
-				Const.pot = Potion.ZAMORAKBREWPOTION;
-			}
-			else if(Const.chosen.equals("Saradomin Brew Potion")) {
-				Const.pot = Potion.SARADOMINBREWPOTION;
+			Variables.whatToDo = 1;
+			Variables.chosen = comboBox1.getSelectedItem().toString();
+			
+			switch(Variables.chosen) {
+			case "Attack Potion":
+				Variables.pot = Potion.ATTACKPOTION;
+				break;
+			case "Ranging Potion":
+				Variables.pot = Potion.RANGINGPOTION;
+				break;
+			case "Strength Potion" :
+				Variables.pot = Potion.STREGNTHPOTION;
+				break;
+			case "Magic Potion":
+				Variables.pot = Potion.MAGICPOTION;
+				break;
+			case "Defence Potion":
+				Variables.pot = Potion.DEFENCEPOTION;
+				break;
+			case "Anti-poison Potion":
+				Variables.pot = Potion.ANTIPOISONPOTION;
+				break;
+			case "Prayer Potion":
+				Variables.pot = Potion.PRAYERPOTION;
+				break;
+			case "Super Attack Potion":
+				Variables.pot = Potion.SUPERATTACKPOTION;
+				break;
+			case "Super Strength Potion":
+				Variables.pot = Potion.SUPERSTRENGTHPOTION;
+				break;
+			case "Super Restore Potion":
+				Variables.pot = Potion.SUPERRESTOREPOTION;
+				break;
+			case "Super Defence Potion":
+				Variables.pot = Potion.SUPERDEFENCEPOTION;
+				break;
+			case "Super Ranging Potion":
+				Variables.pot = Potion.SUPERRANGINGPOTION;
+				break;
+			case "Super Magic Potion":
+				Variables.pot = Potion.SUPERMAGICPOTION;
+				break;
+			case "Zamorak Brew Potion":
+				Variables.pot = Potion.ZAMORAKBREWPOTION;
+				break;
+			case "Saradomin Brew Potion":
+				Variables.pot = Potion.SARADOMINBREWPOTION;
+				break;
 			}
 		}
 		
 		else if(grimyRAD.isSelected()){
-			Const.whatToDo = 3;
-			Const.chosen = comboBox2.getSelectedItem().toString();
-				
-			if(Const.chosen.equals("Guam")) {
-				Const.grimy = Grimy.GUAM;
-			}
-			else if(Const.chosen.equals("Marrentill")) {
-				Const.grimy = Grimy.MARRENTILL;
-			}
-			else if(Const.chosen.equals("Tarromin")) {
-				Const.grimy = Grimy.TARROMIN;
-			}
-			else if(Const.chosen.equals("Harralander")) {
-				Const.grimy = Grimy.HARRALANDER;
-			}
-			else if(Const.chosen.equals("Ranarr")) {
-				Const.grimy = Grimy.RANARR;
-			}
-			else if(Const.chosen.equals("Toadflax")) {
-				Const.grimy = Grimy.TOADFLAX;
-			}
-			else if(Const.chosen.equals("Spiritweed")) {
-				Const.grimy = Grimy.SPIRITWEED;
-			}
-			else if(Const.chosen.equals("Irit")) {
-				Const.grimy = Grimy.IRIT;
-			}
-			else if(Const.chosen.equals("Avantoe")) {
-				Const.grimy = Grimy.AVANTOE;
-			}
-			else if(Const.chosen.equals("Kwuarm")) {
-				Const.grimy = Grimy.KWUARM;
-			}
-			else if(Const.chosen.equals("Snapdragon")) {
-				Const.grimy = Grimy.SNAPDRAGON;
-			}
-			else if(Const.chosen.equals("Cadantine")) {
-				Const.grimy = Grimy.CADANTINE;
-			}
-			else if(Const.chosen.equals("Lantadyme")) {
-				Const.grimy = Grimy.LANTADYME;
-			}
-			else if(Const.chosen.equals("Dwarfweed")) {
-				Const.grimy = Grimy.DWARFWEED;
-			}
-			else if(Const.chosen.equals("Torstol")) {
-				Const.grimy = Grimy.TORSTOL;
-			}
-			else if(Const.chosen.equals("Fellstalk")) {
-				Const.grimy = Grimy.FELLSTALK;
-			}
-				
+			Variables.whatToDo = 3;
+			Variables.chosen = comboBox2.getSelectedItem().toString();
+			
+			switch (Variables.chosen) {
+			
+			case "Guam":
+				Variables.grimy = Grimy.GUAM;
+				break;
+			case "Marrentill":
+				Variables.grimy = Grimy.MARRENTILL;
+				break;
+			case "Tarromin":
+				Variables.grimy = Grimy.TARROMIN;
+				break;
+			case "Harralander":
+				Variables.grimy = Grimy.HARRALANDER;
+				break;
+			case "Ranarr":
+				Variables.grimy = Grimy.RANARR;
+				break;
+			case "Toadflax":
+				Variables.grimy = Grimy.TOADFLAX;
+				break;
+			case "Spiritweed":
+				Variables.grimy = Grimy.SPIRITWEED;
+				break;
+			case "Irit":
+				Variables.grimy = Grimy.IRIT;
+				break;	
+			case "Avantoe":
+				Variables.grimy = Grimy.AVANTOE;
+				break;
+			case "Kwuarm":
+				Variables.grimy = Grimy.KWUARM;
+				break;
+			case "Snapdragon":
+				Variables.grimy = Grimy.SNAPDRAGON;
+				break;
+			case "Cadantine":
+				Variables.grimy = Grimy.CADANTINE;
+				break;
+			case "Lantadyme":
+				Variables.grimy = Grimy.LANTADYME;
+				break;
+			case "Dwarfweed":
+				Variables.grimy = Grimy.DWARFWEED;
+				break;
+			case "Torstol":
+				Variables.grimy = Grimy.TORSTOL;
+				break;
+			case "Fellstalk":
+				Variables.grimy = Grimy.FELLSTALK;
+				break;
+			}			
 		}	
 			
 
 		
-		Const.guiWait = false;
-		destroy();
-		
-		
-		
-		/*if(unfRAD.isSelected()) {
-			Const.whatToDo = 2;
-			String chosen = unfBox.getSelectedItem().toString();
-			
-			if(chosen.equals("Ranarr Unf")){
-				Const.herbToUse = Const.ranarrID;
-			}
-			else if(chosen.equals("Toadflax Unf")) {
-				Const.herbToUse = Const.toadflaxID;
-			}
-			else if(chosen.equals("Spiritweed Unf")) {
-				Const.herbToUse = Const.spiritweedID;
-			}
-			else if(chosen.equals("Cadantine Unf")) {
-				Const.herbToUse = Const.cadantineID;
-			}
-			
-		}
-		else if(potionRAD.isSelected()) {
-			Const.whatToDo = 1;
-			String chosen = comboBox1.getSelectedItem().toString();
-			
-			if(chosen.equals("Attack Potion")) {
-				Const.unfToMake = Const.guamPotionID;
-				Const.herbToUse = Const.guamID;
-				Const.ingreToUse = Const.eyeOfNewtID;
-			}
-			else if(chosen.equals("Ranging Potion")) {
-				Const.unfToMake = Const.uamPotionID;
-				Const.herbToUse = Const.guamID;
-				Const.ingreToUse = Const.redberriesID;
-			}
-			else if(chosen.equals("Magic Potion")) {
-				Const.unfToMake = Const.tarrominPotionID;
-				Const.herbToUse = Const.tarrominID;
-				Const.ingreToUse = Const.beadID;
-			}
-			else if(chosen.equals("Strength Potion")) {
-				Const.unfToMake = Const.tarrominPotionID;
-				Const.herbToUse = Const.tarrominID;
-				Const.ingreToUse = Const.limpID;
-			}
-			else if(chosen.equals("Defence Potion")) {
-				Const.unfToMake = Const.marrentillPotionID;
-				Const.herbToUse = Const.marrentillID;
-				Const.ingreToUse = Const.bearfurID;
-			}
-			else if(chosen.equals("Anti-poison Potion")) {
-				Const.unfToMake = Const.marrentillPotionID;
-				Const.herbToUse = Const.marrentillID;
-				Const.ingreToUse = Const.groundunicornID;
-			}
-			else if(chosen.equals("Prayer Potion")) {
-				Const.unfToMake = Const.ranarrPotionID;
-				Const.herbToUse = Const.ranarrID;
-				Const.ingreToUse = Const.snapeGrassID;
-			}
-			else if(chosen.equals("Super Attack Potion")){
-				unfToMake = iritPotionID;
-				herbToUse = iritID;
-				ingreToUse = eyeOfNewtID;
-			}
-			else if(chosen.equals("Super Strength Potion")) {
-				unfToMake = kwuarmPotionID;
-				herbToUse = kwuarmID;
-				ingreToUse = limpID;
-			}
-			else if(chosen.equals("Super Restore Potion")) {
-				unfToMake = snapdragonPotionID;
-				herbToUse = snapdragonID;
-				ingreToUse = redspidereggsID;
-			}
-			else if(chosen.equals("Super Defence Potion")) {
-				unfToMake = cadantinePotionID;
-				herbToUse = cadantineID;
-				ingreToUse = whiteberriesID;
-			}
-			else if(chosen.equals("Super Ranging Potion")) {
-				unfToMake = dwarfweedPotionID;
-				herbToUse = dwarfweedID;
-				ingreToUse = wineOfZamorakID;
-			}
-			else if(chosen.equals("Super Magic Potion")) {
-				unfToMake = lantadymePotionID;
-				herbToUse = lantadymeID;
-				ingreToUse = potatocactusID;
-			}
-			else if(chosen.equals("Zamorak Brew Potion")) {
-				unfToMake = torstolPotionID;
-				herbToUse = torstolID;
-				ingreToUse = jangerberriesID;
-			}
-			else if(chosen.equals("Saradomin Brew Potion")) {
-				unfToMake = toadflaxPotionID;
-				herbToUse = toadflaxID;
-				ingreToUse = crushednestID;
-			}
-		}
-		else if(grimyRAD.isSelected()){
-			whatToDo = 3;
-			String chosen = comboBox2.getSelectedItem().toString();
-			
-			if(chosen.equals("Guam")) {
-				grimyHerbToUse = grimyGuam;
-			}
-			else if(chosen.equals("Marrentill")) {
-				grimyHerbToUse = grimyMarrentill;
-			}
-			else if(chosen.equals("Tarromin")) {
-				grimyHerbToUse = grimyTarromin;
-			}
-			else if(chosen.equals("Harralander")) {
-				grimyHerbToUse = grimyHarralander;
-			}
-			else if(chosen.equals("Ranarr")) {
-				grimyHerbToUse = grimyRanarr;
-			}
-			else if(chosen.equals("Toadflax")) {
-				grimyHerbToUse = grimyToadflax;
-			}
-			else if(chosen.equals("Spiritweed")) {
-				grimyHerbToUse = grimySpiritweed;
-			}
-			else if(chosen.equals("Irit")) {
-				grimyHerbToUse = grimyIrit;
-			}
-			else if(chosen.equals("Avantoe")) {
-				grimyHerbToUse = grimyAvantoe;
-			}
-			else if(chosen.equals("Kwuarm")) {
-				grimyHerbToUse = grimyKwuarm;
-			}
-			else if(chosen.equals("Snapdragon")) {
-				grimyHerbToUse = grimySnapdragon;
-			}
-			else if(chosen.equals("Cadantine")) {
-				grimyHerbToUse = grimyCadantine;
-			}
-			else if(chosen.equals("Lantadyme")) {
-				grimyHerbToUse = grimyLantadyme;
-			}
-			else if(chosen.equals("Dwarfweed")) {
-				grimyHerbToUse = grimyDwarfweed;
-			}
-			else if(chosen.equals("Torstol")) {
-				grimyHerbToUse = grimyTorstol;
-			}
-			else if(chosen.equals("Fellstalk")) {
-				grimyHerbToUse = grimyFellstalk;
-			}
-			
-		}
-			
-			guiWait = false;
-			g.dispose(); */
+		Variables.guiWait = false;
+		dispose();
+
 	}
 
 	private void initComponents() {
@@ -469,7 +316,7 @@ public class GUI extends JFrame {
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
 	}
 
-	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:Variables
 	// Generated using JFormDesigner Evaluation license - Caleb 
 	private JComboBox<String> comboBox1;
 	private JTextField textField2;
@@ -479,6 +326,6 @@ public class GUI extends JFrame {
 	private JRadioButton potionRAD;
 	private JRadioButton grimyRAD;
 	private JComboBox<String> comboBox2;
-	// JFormDesigner - End of variables declaration  //GEN-END:variables
+	// JFormDesigner - End of Variables declaration  //GEN-END:Variables
 }
 
