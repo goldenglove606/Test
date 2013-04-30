@@ -63,11 +63,7 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	    	SwingUtilities.invokeLater(new Runnable() {
 	    		public void run() {
 	    		GUI gui = new GUI();
-	    		JFrame frame = new JFrame("GUI");//this is the title
-	    		frame.setContentPane(gui.getContentPane());
-	    		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	    		frame.pack();
-	    		frame.setVisible(true);
+	    		gui.setVisible(true);
 	    		}
 	    		});
 					
@@ -79,6 +75,7 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	        while(Variables.guiWait){
 	            Task.sleep(100);
 	        }
+	        
 	        jobsCollection.add(new Banking());
 	        jobsCollection.add(new MakingPots());
 	        jobsCollection.add(new CleaningHerbs());
@@ -123,8 +120,8 @@ public class AIOHerb extends ActiveScript implements MessageListener, PaintListe
 	                        .currentTimeMillis() - Variables.startTime));
 	       
 	        g.setColor(Color.YELLOW);
-	        g.drawLine(Mouse.getX() - 5, Mouse.getY() - 5, Mouse.getX() + 5, Mouse.getY() + 5);
-	        g.drawLine(Mouse.getX() - 5, Mouse.getY() + 5, Mouse.getX() + 5, Mouse.getY() - 5);
+	        g.drawLine(Mouse.getX() - 10, Mouse.getY(), Mouse.getX() + 10, Mouse.getY());
+	        g.drawLine(Mouse.getX(), Mouse.getY() - 10, Mouse.getX(), Mouse.getY() + 10);
 	        g.setBackground(Color.GREEN);
 	        g.setColor(new Color(0, 0, 0, 85));
             g.fillRoundRect(5, 20, 150, 144, 15, 25);
